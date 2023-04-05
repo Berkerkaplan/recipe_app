@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:recipe_app/components/recipe_card.dart';
 import 'package:recipe_app/pages/favorite_recipe_page.dart';
 import 'package:recipe_app/models/recipe_model.dart';
 import 'package:recipe_app/pages/recipe_detail_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/pages/search_page.dart';
 
-import '../companents/recipe_card.dart';
+
 
 //https://api.edamam.com/api/recipes/v2?app_id=e0f14f27&app_key=76251ca17a2eab8d0afbe35df66e5ab1&q=salad&type=public
 class RecipePage extends StatefulWidget {
