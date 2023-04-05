@@ -38,8 +38,7 @@ class _FavoriteRecipePageState extends State<FavoriteRecipePage> {
   }
 
   void deletedSnackbar() {
-  Utils.showSnackBar(context, 'Favorite Recipe Successfully Deleted');
-
+    Utils.showSnackBar(context, 'Favorite Recipe Successfully Deleted');
   }
 
   void deleteFavoriteItem(int key) {
@@ -53,10 +52,10 @@ class _FavoriteRecipePageState extends State<FavoriteRecipePage> {
       backgroundColor: Colors.red.shade200,
       appBar: AppBar(
         elevation: 0,
-        title: Text('Favorite Recipes'),
+        title: const Text('Favorite Recipes'),
         centerTitle: true,
         backgroundColor: Colors.red.withOpacity(0.7),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
       ),
@@ -69,7 +68,7 @@ class _FavoriteRecipePageState extends State<FavoriteRecipePage> {
             return SlidableAutoCloseBehavior(
               closeWhenOpened: true,
               child: ListView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 reverse: true,
                 itemCount: favoriteItems.length,
@@ -99,100 +98,100 @@ class _FavoriteRecipePageState extends State<FavoriteRecipePage> {
     );
   }
 
-  buildFavoriteCard(FavoriteModell key, FavoriteProvider favoriteProvider, int index) {
+  buildFavoriteCard(
+      FavoriteModell key, FavoriteProvider favoriteProvider, int index) {
     return SingleChildScrollView(
-                    child: Slidable(
-                      key: Key(key.toString()),
-                      startActionPane: ActionPane(
-                        extentRatio: 0.5,
-                        motion: StretchMotion(),
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 100,
-                              width: double.infinity,
-                              child: SlidableAction(
-                                borderRadius: BorderRadius.circular(30),
-                                onPressed: (BuildContext context) {
-                                  setState(() {
-                                    _shareWithFriends();
-                                  });
-                                },
-                                backgroundColor: Colors.green,
-                                icon: Icons.share,
-                                label: 'Share Your Friends',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      endActionPane: ActionPane(
-                        motion: StretchMotion(),
-                        dismissible: DismissiblePane(onDismissed: () {
-                          setState(() {
-                            favoriteProvider.favoriteList.removeAt(index);
-                          });
-                          //deleteFavoriteItem(index);
-                          //favoriteModel.delete(index);
-                          deletedSnackbar();
-                        }),
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 100,
-                              width: double.infinity,
-                              child: SlidableAction(
-                                padding: EdgeInsets.all(50),
-                                  borderRadius: BorderRadius.circular(30),
-                                  onPressed: (BuildContext context) {
-                                    setState(() {
-                                      favoriteProvider.favoriteList.removeAt(index);
-                                    });
-                                    //deleteFavoriteItem(index);
-                                    // favoriteModel.delete(key);
-                                    deletedSnackbar();
-                                  },
-                                  backgroundColor: Colors.red,
-                                  icon: Icons.delete,
-                                  label: 'Delete',
-                                ),
-                              ),
-                          ),
-                        ],
-                      ),
-                      child: Container(
-                        alignment: Alignment.bottomCenter,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        padding: EdgeInsets.all(10),
-                        height: 180,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.red.withOpacity(0.7),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            filterQuality: FilterQuality.low,
-                            image: NetworkImage(
-                              '${key.image.toString()}',
-                            ),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[200],
-                          ),
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            key.recipeName.toString(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
+      child: Slidable(
+        key: Key(key.toString()),
+        startActionPane: ActionPane(
+          extentRatio: 0.5,
+          motion: const StretchMotion(),
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: double.infinity,
+                child: SlidableAction(
+                  borderRadius: BorderRadius.circular(30),
+                  onPressed: (BuildContext context) {
+                    setState(() {
+                      _shareWithFriends();
+                    });
+                  },
+                  backgroundColor: Colors.green,
+                  icon: Icons.share,
+                  label: 'Share Your Friends',
+                ),
+              ),
+            ),
+          ],
+        ),
+        endActionPane: ActionPane(
+          extentRatio: 0.5,
+          motion: const StretchMotion(),
+          dismissible: DismissiblePane(onDismissed: () {
+            setState(() {
+              favoriteProvider.favoriteList.removeAt(index);
+            });
+            //deleteFavoriteItem(index);
+            //favoriteModel.delete(index);
+            deletedSnackbar();
+          }),
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: double.infinity,
+                child: SlidableAction(
+                  borderRadius: BorderRadius.circular(30),
+                  onPressed: (BuildContext context) {
+                    setState(() {
+                      favoriteProvider.favoriteList.removeAt(index);
+                    });
+                    //deleteFavoriteItem(index);
+                    // favoriteModel.delete(key);
+                    deletedSnackbar();
+                  },
+                  backgroundColor: Colors.red,
+                  icon: Icons.delete,
+                  label: 'Delete',
+                ),
+              ),
+            ),
+          ],
+        ),
+        child: Container(
+          alignment: Alignment.bottomCenter,
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.all(10),
+          height: 180,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.red.withOpacity(0.7),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.low,
+              image: NetworkImage(
+                '${key.image.toString()}',
+              ),
+            ),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey[200],
+            ),
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              key.recipeName.toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
